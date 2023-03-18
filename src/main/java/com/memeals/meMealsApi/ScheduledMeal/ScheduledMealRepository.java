@@ -1,5 +1,10 @@
 package com.memeals.meMealsApi.ScheduledMeal;
+import java.util.List;
+import java.util.Optional;
 
-public class ScheduledMealRepository {
-    
+import org.springframework.data.jpa.repository.JpaRepository;
+
+
+public interface ScheduledMealRepository extends JpaRepository<ScheduledMeal, Long> {
+
 }
