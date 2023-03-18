@@ -5,31 +5,33 @@
                                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
 
     <changeSet id="2" author="chatgpt">
-
+        <createTable tableName="meals">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="meal_name" type="VARCHAR(255)"/>
+            <column name="icon_url" type="VARCHAR(255)"/>
+            <column name="ingredients" type="VARCHAR(1000)"/>
+        </createTable>
         <insert tableName="meals">
             <column name="meal_name" value="Spaghetti Bolognese"/>
             <column name="icon_url" value="https://i.ibb.co/8gYKXxF/spagetti.png"/>
         </insert>
-
         <insert tableName="meals">
             <column name="meal_name" value="Chicken Curry"/>
             <column name="icon_url" value="https://i.ibb.co/yRp1DSV/chicken-curry.png"/>
         </insert>
-
         <insert tableName="meals">
             <column name="meal_name" value="Grilled Salmon"/>
             <column name="icon_url" value=""/>
         </insert>
-
         <insert tableName="meals">
             <column name="meal_name" value="Margherita Pizza"/>
             <column name="icon_url" value=""/>
         </insert>
-
         <insert tableName="meals">
             <column name="meal_name" value="Beef Stir-Fry"/>
             <column name="icon_url" value=""/>
         </insert>
-
     </changeSet>
 </databaseChangeLog>

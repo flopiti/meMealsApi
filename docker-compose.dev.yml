@@ -13,4 +13,7 @@ services:
     ports:
       - "3307:3306"
     volumes:
-      - /mnt/wsl/mysql-data:/var/lib/mysql
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:
