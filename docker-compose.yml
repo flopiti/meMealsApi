@@ -27,3 +27,6 @@ services:
 
 volumes:
   mysql-data:
+networks:
+  meal-network1:
+    driver: bridge
