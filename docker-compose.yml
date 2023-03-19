@@ -7,7 +7,7 @@ services:
     command: ["java", "-jar", "/app.jar"]
     ports:
       - "8080:8080"
-    network:
+    networks:
       - meal-network1
   db:
     image: mysql:latest
@@ -22,7 +22,7 @@ services:
       - "3307:3306"
     volumes:
       - mysql-data:/var/lib/mysql
-    network:
+    networks:
       - meal-network1
 
 volumes:
