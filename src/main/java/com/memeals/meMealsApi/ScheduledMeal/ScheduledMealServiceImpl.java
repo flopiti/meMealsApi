@@ -1,6 +1,7 @@
 package com.memeals.meMealsApi.ScheduledMeal;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,13 +56,18 @@ public class ScheduledMealServiceImpl implements ScheduledMealService {
     }
 
     @Override
-    public List<ScheduledMeal> getAll() {
+    public List<ScheduledMealDTO> getAll() {
         List<ScheduledMeal> scheduledMeals = scheduledMealRepository.findAll();
+        List<ScheduledMealDTO> scheduledMealDTOs = new ArrayList<>();
+
         for (ScheduledMeal scheduledMeal : scheduledMeals) {
-            Meal meal = mealRepository.findById(scheduledMeal.getMeal().getId())
-                    .orElseThrow(() -> new MealNotFoundException(scheduledMeal.getMeal().getId()));
-            scheduledMeal.setMeal(meal);
+            ScheduledMealDTO dto = new ScheduledMealDTO();
+            dto.setId(scheduledMeal.getId());
+            dto.setDate(scheduledMeal.getDate());
+            dto.setMealType(scheduledMeal.getMealType());
+            dto.setMealId(scheduledMeal.getMeal().getId());
+            scheduledMealDTOs.add(dto);
         }
-        return scheduledMeals;
+        return scheduledMealDTOs;
         }
 }

@@ -22,7 +22,7 @@ public class ScheduledMealController {
     }
 
     @GetMapping
-    public List<ScheduledMeal> getAllForUser() {
+    public List<ScheduledMealDTO> getAllForUser() {
         return scheduledMealService.getAll();
     }
 
