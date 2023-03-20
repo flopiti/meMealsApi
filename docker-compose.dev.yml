@@ -1,6 +1,15 @@
 version: '3.7'
 
 services:
+  meal-api:
+    image: openjdk:17-jdk-alpine
+    volumes:
+      - ./target/meMealsApi-0.0.1-SNAPSHOT.jar:/app.jar
+    command: ["java", "-jar", "/app.jar"]
+    ports:
+      - "8080:8080"
+    networks:
+      - meal-network1
   db:
     image: mysql:latest
     container_name: mysql-container
@@ -14,6 +23,12 @@ services:
       - "3307:3306"
     volumes:
       - mysql-data:/var/lib/mysql
+    networks:
+      - meal-network1
 
 volumes:
   mysql-data:
+  
+networks:
+  meal-network1:
+    driver: bridge
