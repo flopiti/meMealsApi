@@ -14,6 +14,7 @@
 	<name>meMealsApi</name>
 	<description>meMeals Api</description>
 	<properties>
+	    <spring.profiles.active>local</spring.profiles.active>
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
@@ -50,6 +51,15 @@
 
 	<build>
 		<plugins>
+		    <plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+				<systemPropertyVariables>
+					<spring.profiles.active>${spring.profiles.active}</spring.profiles.active>
+				</systemPropertyVariables>
+            </configuration>
+        	</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
