@@ -16,6 +16,18 @@ services:
       - mysql-data:/var/lib/mysql
     networks:
       - meal-network1
+  springboot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: springboot-container
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    networks:
+      - meal-network1
 
 volumes:
   mysql-data:
