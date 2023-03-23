@@ -1,0 +1,37 @@
+version: '3.7'
+
+services:
+  db:
+    image: mysql:latest
+    container_name: mysql-container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: meMeals
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - meal-network1
+  springboot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: springboot-container
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    networks:
+      - meal-network1
+
+volumes:
+  mysql-data:
+  
+networks:
+  meal-network1:
+    driver: bridge
