@@ -2,5 +2,9 @@ databaseChangeLog:
   - changeSet:
       id: 1
       author: your_name
-      comment: "Empty change set"
-      changes: []
+      changes:
+        - sql:
+            sql: CREATE DATABASE IF NOT EXISTS meMeals;
+            dbms: mysql
+            splitStatements: false
+            stripComments: false
