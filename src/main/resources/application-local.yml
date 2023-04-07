@@ -10,3 +10,6 @@ spring:
     show-sql: true
   liquibase:
     change-log: classpath:/db/changelog/db.changelog-master.yaml
+  auth0:
+    audience: dev-6qooy8-p.us.auth0.com
+    issuer: https://dev-6qooy8-p.us.auth0.com
