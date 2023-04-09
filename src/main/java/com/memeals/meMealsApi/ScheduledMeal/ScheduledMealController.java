@@ -5,7 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import com.memeals.meMealsApi.AuthService;
 import com.memeals.meMealsApi.MealNotFoundException;
 
 import java.time.LocalDate;
@@ -16,13 +16,18 @@ import java.util.List;
 public class ScheduledMealController {
     private final ScheduledMealService scheduledMealService;
 
+    private final AuthService authService;
+
     @Autowired
-    public ScheduledMealController(ScheduledMealService scheduledMealService) {
+    public ScheduledMealController(ScheduledMealService scheduledMealService, AuthService authService) {
         this.scheduledMealService = scheduledMealService;
+        this.authService = authService;
     }
 
     @GetMapping
     public List<ScheduledMealDTO> getAllForUser() {
+        String userId = authService.getEmailFromToken();
+        System.out.println("User ID: " + userId);
         return scheduledMealService.getAll();
     }
 
