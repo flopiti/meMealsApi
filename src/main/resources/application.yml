@@ -13,4 +13,3 @@ spring:
 auth0:
   audience: https://meMealsApi
   issuer: https://dev-6qooy8-p.us.auth0.com/
-  secret: ${AUTH0_SECRET}
