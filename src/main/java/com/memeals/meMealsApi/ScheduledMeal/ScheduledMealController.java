@@ -26,7 +26,7 @@ public class ScheduledMealController {
 
     @GetMapping
     public List<ScheduledMealDTO> getAllForUser() {
-        String userId = authService.getEmailFromToken();
+        String userId = authService.getUserId();
         System.out.println("User ID: " + userId);
         return scheduledMealService.getAll();
     }
