@@ -1,3 +1,5 @@
+package com.memeals.meMealsApi.User;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
