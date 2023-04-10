@@ -35,4 +35,14 @@ public class UserService {
     public User getUserByAuth0Id(String auth0Id) {
         return userRepository.findByAuth0Id(auth0Id);
     }
+
+    public User createUser(String email, String auth0Id, String username) {
+        User user = new User();
+        user.setEmail(email);
+        user.setAuth0Id(auth0Id);
+        user.setUsername(username);
+
+        return userRepository.save(user);
+    }
+
 }
