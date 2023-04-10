@@ -44,13 +44,28 @@ public class AuthService {
         return null;
     }
 
+    public User getUser() {
+        Authentication authentification = SecurityContextHolder.getContext().getAuthentication();  
+        if (authentification instanceof AuthenticationJsonWebToken) {
+            String token = authentification.getCredentials().toString();
+            DecodedJWT jwt = JWT.decode(token);
+            String id = jwt.getClaim("sub").asString().split("\\|")[1];            
+            if (id != null) {
+              User user = userService.getUserByAuth0Id(id);
+              System.out.println(user.toString());
+              return user;
+            } else {
+                System.out.println("User ID not found in the JWT token");
+              return null;
+            }
+        }
+        return null;
+    }                         
+
   public String getUserId(){
     String auth0Id = getAuth0Id();
-    System.out.println("Auth0 ID: " + auth0Id);
     if (auth0Id != null) {
       User user = userService.getUserByAuth0Id(auth0Id);
-      System.out.println(user.toString());
-      System.out.println("User ID: " + user.getId());
       if (user == null) {
         return null;
       }
