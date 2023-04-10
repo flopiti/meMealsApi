@@ -11,6 +11,8 @@ import com.memeals.meMealsApi.MealNotFoundException;
 import com.memeals.meMealsApi.ScheduledMealNotFoundException;
 import com.memeals.meMealsApi.Meal.Meal;
 import com.memeals.meMealsApi.Meal.MealRepository;
+import com.memeals.meMealsApi.User.User;
+import com.memeals.meMealsApi.AuthService;
 
 
 @Service
@@ -18,23 +20,28 @@ public class ScheduledMealServiceImpl implements ScheduledMealService {
 
     private final ScheduledMealRepository scheduledMealRepository;
     private final MealRepository mealRepository;
+    private final AuthService authService;
 
     public ScheduledMealServiceImpl(ScheduledMealRepository scheduledMealRepository, 
-                                     MealRepository mealRepository) {
+                                     MealRepository mealRepository,
+                                     AuthService authService) {
+        this.authService = authService;
         this.scheduledMealRepository = scheduledMealRepository;
         this.mealRepository = mealRepository;
     }
 
     @Override
-    public ScheduledMeal scheduleMeal(Long mealId, LocalDate date, MealType mealType) {
+    public ScheduledMeal scheduleMeal(Long mealId, LocalDate date, MealType mealType, Long userId) throws MealNotFoundException {
         Meal meal = mealRepository.findById(mealId)
                 .orElseThrow(() -> new MealNotFoundException("Meal not found with id " + mealId));
-
+        User User = authService.getUser();
+        System.out.println("User IS FOUND : " + User.toString());
         ScheduledMeal scheduledMeal = new ScheduledMeal();
         scheduledMeal.setMeal(meal);
         scheduledMeal.setDate(date);
         scheduledMeal.setMealType(mealType);
-
+        scheduledMeal.setUser(User);
+        System.out.println("Scheduled Meal: " + scheduledMeal.toString());
         return scheduledMealRepository.save(scheduledMeal);
     }
 
