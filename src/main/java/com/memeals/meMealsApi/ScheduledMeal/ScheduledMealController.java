@@ -36,8 +36,8 @@ public class ScheduledMealController {
         return scheduledMealService.scheduleMeal(request.getMealId(), request.getDate(), request.getMealType());
     }
 
-    @DeleteMapping("/{userId}/{scheduledMealId}")
-    public void deleteScheduledMeal(@PathVariable Long userId, @PathVariable Long scheduledMealId) {
+    @DeleteMapping("/{scheduledMealId}")
+    public void deleteScheduledMeal(@PathVariable Long scheduledMealId) {
         scheduledMealService.deleteScheduledMeal(scheduledMealId);
     }
 
