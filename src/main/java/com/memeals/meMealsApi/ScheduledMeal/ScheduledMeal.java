@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.*;
+import com.memeals.meMealsApi.User.User;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.memeals.meMealsApi.Meal.Meal;
@@ -41,4 +42,10 @@ public class ScheduledMeal {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "meal_id")
     private Meal meal;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+    
 }
