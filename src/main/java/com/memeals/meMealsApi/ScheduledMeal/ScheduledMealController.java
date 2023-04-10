@@ -27,13 +27,20 @@ public class ScheduledMealController {
     @GetMapping
     public List<ScheduledMealDTO> getAllForUser() {
         String userId = authService.getUserId();
+        if(userId == null) {
+            throw new MealNotFoundException("User not found");
+        }
         System.out.println("User ID: " + userId);
         return scheduledMealService.getAllMyScheduledMeal(userId.equals("null") ? null : Long.parseLong(userId));
     }
 
     @PostMapping
     public ScheduledMeal scheduleMeal(@RequestBody ScheduledMealRequest request) {
-        return scheduledMealService.scheduleMeal(request.getMealId(), request.getDate(), request.getMealType());
+        String userId = authService.getUserId();
+        if(userId == null) {
+            throw new MealNotFoundException("User not found");
+        }
+        return scheduledMealService.scheduleMeal(request.getMealId(), request.getDate(), request.getMealType(), Long.parseLong(userId));
     }
 
     @DeleteMapping("/{scheduledMealId}")
