@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface ScheduledMealService {
-    List<ScheduledMealDTO> getAll();
+    List<ScheduledMealDTO> getAllMyScheduledMeal(Long userId);
     ScheduledMeal scheduleMeal( Long mealId, LocalDate date, MealType mealType);
     void deleteScheduledMeal(Long scheduledMealId);
     ScheduledMeal editScheduledMeal(Long scheduledMealId, LocalDate date, MealType mealType);

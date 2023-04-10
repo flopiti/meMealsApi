@@ -28,7 +28,7 @@ public class ScheduledMealController {
     public List<ScheduledMealDTO> getAllForUser() {
         String userId = authService.getUserId();
         System.out.println("User ID: " + userId);
-        return scheduledMealService.getAll();
+        return scheduledMealService.getAllMyScheduledMeal(userId.equals("null") ? null : Long.parseLong(userId));
     }
 
     @PostMapping

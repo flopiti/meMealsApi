@@ -56,8 +56,8 @@ public class ScheduledMealServiceImpl implements ScheduledMealService {
     }
 
     @Override
-    public List<ScheduledMealDTO> getAll() {
-        List<ScheduledMeal> scheduledMeals = scheduledMealRepository.findAll();
+    public List<ScheduledMealDTO> getAllMyScheduledMeal(Long userId) {
+        List<ScheduledMeal> scheduledMeals = scheduledMealRepository.findByUserId(userId);
         List<ScheduledMealDTO> scheduledMealDTOs = new ArrayList<>();
 
         for (ScheduledMeal scheduledMeal : scheduledMeals) {
