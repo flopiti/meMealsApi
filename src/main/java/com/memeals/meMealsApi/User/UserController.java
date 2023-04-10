@@ -25,7 +25,7 @@ public class UserController {
       System.out.println("Creating User: " + user);
       try {
           String email = (String) user.get("email");
-          String auth0Id = (String) user.get("auth0Id");
+          String auth0Id = (String) user.get("id");
           String username = (String) user.get("username");
   
           User newUser = userService.createUser(email, auth0Id, username);
