@@ -2,6 +2,7 @@ package com.memeals.meMealsApi.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -32,7 +33,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User getUserByAuth0Id(String auth0Id) {
+    public Optional<User> getUserByAuth0Id(String auth0Id) {
         return userRepository.findByAuth0Id(auth0Id);
     }
 
@@ -42,6 +43,10 @@ public class UserService {
         user.setAuth0Id(auth0Id);
         user.setUsername(username);
 
+        return userRepository.save(user);
+    }
+
+    public User edit(User user) {
         return userRepository.save(user);
     }
 
