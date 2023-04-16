@@ -51,7 +51,7 @@ public class AuthService {
             DecodedJWT jwt = JWT.decode(token);
             String id = jwt.getClaim("sub").asString().split("\\|")[1];            
             if (id != null) {
-              User user = userService.getUserByAuth0Id(id);
+              User user = userService.getUserByAuth0Id(id).get();
               System.out.println(user.toString());
               return user;
             } else {
@@ -65,7 +65,7 @@ public class AuthService {
   public String getUserId(){
     String auth0Id = getAuth0Id();
     if (auth0Id != null) {
-      User user = userService.getUserByAuth0Id(auth0Id);
+      User user = userService.getUserByAuth0Id(auth0Id).get();
       if (user == null) {
         return null;
       }
