@@ -23,8 +23,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .forRS256(audience, issuer)
                 .configure(http)
                 .authorizeRequests()
-                .antMatchers("/users/**").permitAll()
-                .antMatchers("/users").permitAll()
                 .antMatchers("/public/**").permitAll() // Allow public endpoints without authentication
                 .anyRequest().authenticated(); // Protect all other endpoints with authentication
     }
