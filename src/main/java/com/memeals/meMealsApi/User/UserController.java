@@ -32,8 +32,8 @@ public class UserController {
       System.out.println("Creating User: " + user);
       try {
           String email = (String) user.get("email");
-          String auth0Id = (String) user.get("id");
-          String username = (String) user.get("username");
+          String auth0Id = (String) user.get("auth0Id");
+          String username = (String) user.get("name");
   
           User newUser = userService.createUser(email, auth0Id, username);
           return new ResponseEntity<>(newUser, HttpStatus.CREATED);
