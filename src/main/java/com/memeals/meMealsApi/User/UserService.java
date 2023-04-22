@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
+
 @Service
 public class UserService {
 
@@ -42,8 +43,11 @@ public class UserService {
         user.setEmail(email);
         user.setAuth0Id(auth0Id);
         user.setUsername(username);
-
-        return userRepository.save(user);
+        try {
+            return userRepository.save(user);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public User edit(User user) {
