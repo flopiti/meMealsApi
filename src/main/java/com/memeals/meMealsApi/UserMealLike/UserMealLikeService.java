@@ -17,13 +17,11 @@ public class UserMealLikeService {
         this.userMealLikeRepository = userMealLikeRepository;
     }
 
-
     public List<Meal> getMealLikes(User user) {
         List<UserMealLike> mealsLike = userMealLikeRepository.findByUser(user);
         List<Meal> meals = mealsLike.stream().map(mealLike -> mealLike.getMeal()).toList();
         return meals;
     }
-
 
     public UserMealLike like(User user, Meal meal) {
         UserMealLike userMealLike = new UserMealLike();
@@ -36,5 +34,4 @@ public class UserMealLikeService {
         UserMealLike userMealLike = userMealLikeRepository.findByUserAndMeal(user, meal);
         userMealLikeRepository.delete(userMealLike);
     }
-
 }
