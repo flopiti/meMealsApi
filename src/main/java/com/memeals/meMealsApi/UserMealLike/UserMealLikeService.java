@@ -2,10 +2,9 @@ package com.memeals.meMealsApi.UserMealLike;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.Optional;
 import com.memeals.meMealsApi.User.User;
-import com.memeals.meMealsApi.User.UserService;
 import java.util.List;
+import com.memeals.meMealsApi.Meal.Meal;
 
 
 @Service
@@ -19,9 +18,23 @@ public class UserMealLikeService {
     }
 
 
-    public List<UserMealLike> getMealLikes(User user) {
-        return userMealLikeRepository.findByUser(user);
+    public List<Meal> getMealLikes(User user) {
+        List<UserMealLike> mealsLike = userMealLikeRepository.findByUser(user);
+        List<Meal> meals = mealsLike.stream().map(mealLike -> mealLike.getMeal()).toList();
+        return meals;
     }
 
+
+    public UserMealLike like(User user, Meal meal) {
+        UserMealLike userMealLike = new UserMealLike();
+        userMealLike.setUser(user);
+        userMealLike.setMeal(meal);
+        return userMealLikeRepository.save(userMealLike);
+    }
+
+    public void unlike(User user, Meal meal) {
+        UserMealLike userMealLike = userMealLikeRepository.findByUserAndMeal(user, meal);
+        userMealLikeRepository.delete(userMealLike);
+    }
 
 }
