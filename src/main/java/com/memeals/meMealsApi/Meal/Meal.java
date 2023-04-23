@@ -1,10 +1,12 @@
 package com.memeals.meMealsApi.Meal;
 
 import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.List;
 
 @Entity
 @Table(name = "meals")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Meal {
 
     @Id
