@@ -5,7 +5,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.memeals.meMealsApi.AuthService;
+
+import com.memeals.meMealsApi.Auth0.AuthService;
 import com.memeals.meMealsApi.Exceptions.MealNotFoundException;
 
 import java.time.LocalDate;

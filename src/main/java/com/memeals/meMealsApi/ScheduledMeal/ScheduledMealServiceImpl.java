@@ -6,12 +6,12 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 
+import com.memeals.meMealsApi.Auth0.AuthService;
 import com.memeals.meMealsApi.Exceptions.MealNotFoundException;
 import com.memeals.meMealsApi.Exceptions.ScheduledMealNotFoundException;
 import com.memeals.meMealsApi.Meal.Meal;
 import com.memeals.meMealsApi.Meal.MealRepository;
 import com.memeals.meMealsApi.User.User;
-import com.memeals.meMealsApi.AuthService;
 
 
 @Service
