@@ -1,6 +1,6 @@
 package com.memeals.meMealsApi.ScheduledMeal;
 
-public enum MealType {
+public enum ScheduledMealType {
     breakfast,
     lunch,
     dinner

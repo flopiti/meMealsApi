@@ -8,6 +8,6 @@ import lombok.Data;
 public class ScheduledMealDTO {
     private Long id;
     private LocalDate date;
-    private MealType mealType;
+    private ScheduledMealType mealType;
     private Long mealId;
 }

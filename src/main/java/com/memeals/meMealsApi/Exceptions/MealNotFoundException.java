@@ -1,4 +1,4 @@
-package com.memeals.meMealsApi;
+package com.memeals.meMealsApi.Exceptions;
 
 public class MealNotFoundException extends RuntimeException {
     public MealNotFoundException(String message) {

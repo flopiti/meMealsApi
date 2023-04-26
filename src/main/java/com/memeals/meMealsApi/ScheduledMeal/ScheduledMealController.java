@@ -5,8 +5,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.memeals.meMealsApi.AuthService;
-import com.memeals.meMealsApi.MealNotFoundException;
+
+import com.memeals.meMealsApi.Auth0.AuthService;
+import com.memeals.meMealsApi.Exceptions.MealNotFoundException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -51,7 +52,7 @@ public class ScheduledMealController {
     @PutMapping("/{scheduledMealId}")
     public ScheduledMeal editScheduledMeal(@PathVariable Long scheduledMealId,
                                             @RequestParam(value = "date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
-                                            @RequestParam(value = "mealType", required = false) MealType mealType) {
+                                            @RequestParam(value = "mealType", required = false) ScheduledMealType mealType) {
         return scheduledMealService.editScheduledMeal(scheduledMealId, date, mealType);
     }
 

@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.memeals.meMealsApi.AuthService;
-import com.memeals.meMealsApi.MealNotFoundException;
+
+import com.memeals.meMealsApi.Auth0.AuthService;
+import com.memeals.meMealsApi.Exceptions.MealNotFoundException;
+
 import java.util.List;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import com.memeals.meMealsApi.Meal.Meal;

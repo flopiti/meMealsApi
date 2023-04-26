@@ -36,7 +36,7 @@ public class ScheduledMeal {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "meal_type")
-    private MealType mealType;
+    private ScheduledMealType mealType;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
