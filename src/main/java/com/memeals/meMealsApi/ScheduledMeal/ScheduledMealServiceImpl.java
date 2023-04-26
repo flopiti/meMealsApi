@@ -4,9 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.stereotype.Service;
-
 import com.memeals.meMealsApi.MealNotFoundException;
 import com.memeals.meMealsApi.ScheduledMealNotFoundException;
 import com.memeals.meMealsApi.Meal.Meal;
@@ -31,7 +29,7 @@ public class ScheduledMealServiceImpl implements ScheduledMealService {
     }
 
     @Override
-    public ScheduledMeal scheduleMeal(Long mealId, LocalDate date, MealType mealType, Long userId) throws MealNotFoundException {
+    public ScheduledMeal scheduleMeal(Long mealId, LocalDate date, ScheduledMealType mealType, Long userId) throws MealNotFoundException {
         Meal meal = mealRepository.findById(mealId)
                 .orElseThrow(() -> new MealNotFoundException("Meal not found with id " + mealId));
         User User = authService.getUser();
@@ -51,7 +49,7 @@ public class ScheduledMealServiceImpl implements ScheduledMealService {
     }
 
     @Override
-    public ScheduledMeal editScheduledMeal(Long scheduledMealId, LocalDate date, MealType mealType) throws ScheduledMealNotFoundException {
+    public ScheduledMeal editScheduledMeal(Long scheduledMealId, LocalDate date, ScheduledMealType mealType) throws ScheduledMealNotFoundException {
         Optional<ScheduledMeal> optionalScheduledMeal = scheduledMealRepository.findById(scheduledMealId);
         if (!optionalScheduledMeal.isPresent()) {
             throw new ScheduledMealNotFoundException("Scheduled Meal not found for Id: " + scheduledMealId);
