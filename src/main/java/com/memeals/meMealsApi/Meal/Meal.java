@@ -19,18 +19,12 @@ public class Meal {
     @Column(name = "icon_url")
     private String iconUrl;
 
-    @ElementCollection
-    @CollectionTable(name = "meal_ingredients", joinColumns = @JoinColumn(name = "meal_id"))
-    @Column(name = "ingredient")
-    private List<String> ingredients;
-
     public Meal() {
     }
 
-    public Meal(String mealName, String iconUrl, List<String> ingredients) {
+    public Meal(String mealName, String iconUrl) {
         this.mealName = mealName;
         this.iconUrl = iconUrl;
-        this.ingredients = ingredients;
     }
 
     public Long getId() {
@@ -57,11 +51,4 @@ public class Meal {
         this.iconUrl = iconUrl;
     }
 
-    public List<String> getIngredients() {
-        return ingredients;
-    }
-
-    public void setIngredients(List<String> ingredients) {
-        this.ingredients = ingredients;
-    }
 }
