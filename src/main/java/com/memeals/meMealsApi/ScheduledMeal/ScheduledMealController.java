@@ -51,7 +51,7 @@ public class ScheduledMealController {
     @PutMapping("/{scheduledMealId}")
     public ScheduledMeal editScheduledMeal(@PathVariable Long scheduledMealId,
                                             @RequestParam(value = "date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
-                                            @RequestParam(value = "mealType", required = false) MealType mealType) {
+                                            @RequestParam(value = "mealType", required = false) ScheduledMealType mealType) {
         return scheduledMealService.editScheduledMeal(scheduledMealId, date, mealType);
     }
 
