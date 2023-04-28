@@ -2,12 +2,15 @@ package com.memeals.meMealsApi.Meal;
 
 import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "meals")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Meal {
+
+    @OneToMany(mappedBy = "meal", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<IngredientMeal> mealIngredients;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
