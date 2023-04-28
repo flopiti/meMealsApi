@@ -1,16 +1,23 @@
 package com.memeals.meMealsApi.Meal;
 
 import javax.persistence.*;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import lombok.Data;
+
+import java.util.List;
+
+@Data
 @Entity
 @Table(name = "meals")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Meal {
 
-    @OneToMany(mappedBy = "meal", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<IngredientMeal> mealIngredients;
+    @OneToMany(mappedBy = "meal", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<IngredientMeal> mealIngredients;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
