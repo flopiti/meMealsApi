@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+<changeSet id="create_meal_ingredients_table" author="your_name">
+    <createTable tableName="meal_ingredients">
+        <column name="id" type="bigint" autoIncrement="true">
+            <constraints primaryKey="true" nullable="false"/>
+        </column>
+        <column name="meal_id" type="bigint">
+            <constraints nullable="false"/>
+        </column>
+        <column name="ingredient_id" type="bigint">
+            <constraints nullable="false"/>
+        </column>
+        <column name="quantity" type="double">
+            <constraints nullable="false"/>
+        </column>
+        <column name="unit_of_measurement" type="varchar(255)">
+            <constraints nullable="false"/>
+        </column>
+    </createTable>
+    <addForeignKeyConstraint constraintName="fk_meal_ingredients_meal_id"
+                              baseTableName="meal_ingredients" baseColumnNames="meal_id"
+                              referencedTableName="meals" referencedColumnNames="id"/>
+    <addForeignKeyConstraint constraintName="fk_meal_ingredients_ingredient_id"
+                              baseTableName="meal_ingredients" baseColumnNames="ingredient_id"
+                              referencedTableName="ingredients" referencedColumnNames="id"/>
+</changeSet></databaseChangeLog>
