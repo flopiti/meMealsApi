@@ -15,6 +15,7 @@ public class MealServiceImpl implements MealService {
     @Autowired
     private MealRepository mealRepository;
 
+    @Autowired
     private IngredientMealRepository mealIngredientRepository;
 
     @Autowired
