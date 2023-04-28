@@ -30,9 +30,9 @@ public class MealController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Meal>> getAllMeals() {
-        List<Meal> meals = mealService.getAllMeals();
-        return new ResponseEntity<>(meals, HttpStatus.OK);
+    public ResponseEntity<List<MealDTO>> getAllMeals() {
+        List<MealDTO> mealDTOs = mealService.getAllMeals();
+        return new ResponseEntity<>(mealDTOs, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
