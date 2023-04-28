@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.memeals.meMealsApi.Ingredient.Ingredient;
 import com.memeals.meMealsApi.Ingredient.IngredientRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,6 +39,15 @@ public class MealServiceImpl implements MealService {
         return meal;
     }
 
+    public List<MealDTO> convertToDTOList(List<Meal> meals) {
+        List<MealDTO> mealDTOs = new ArrayList<>();
+        for (Meal meal : meals) {
+            mealDTOs.add(convertToDTO(meal));
+        }
+        return mealDTOs;
+    }
+    
+    
     @Override
     public Meal getMealById(Long id) {
         Optional<Meal> meal = mealRepository.findById(id);
@@ -48,8 +58,9 @@ public class MealServiceImpl implements MealService {
     }
 
     @Override
-    public List<Meal> getAllMeals() {
-        return mealRepository.findAll();
+    public List<MealDTO> getAllMeals() {
+        List<Meal> meals = mealRepository.findAll();
+        return convertToDTOList(meals);
     }
 
     @Override
@@ -60,5 +71,22 @@ public class MealServiceImpl implements MealService {
     @Override
     public void deleteMeal(Long id) {
         mealRepository.deleteById(id);
+    }
+
+    public MealDTO convertToDTO(Meal meal) {
+        MealDTO mealDTO = new MealDTO();
+        mealDTO.setMealName(meal.getMealName());
+        mealDTO.setIconUrl(meal.getIconUrl());
+        List<MealIngredientDTO> mealIngredientDTOs = new ArrayList<>();
+        for (IngredientMeal mealIngredient : meal.getMealIngredients()) {
+            MealIngredientDTO mealIngredientDTO = new MealIngredientDTO();
+            mealIngredientDTO.setIngredientId(mealIngredient.getIngredient().getId());
+            mealIngredientDTO.setQuantity(mealIngredient.getQuantity());
+            mealIngredientDTO.setUnitOfMeasurement(mealIngredient.getUnitOfMeasurement());
+            mealIngredientDTO.setIngredientName(mealIngredient.getIngredient().getName());
+            mealIngredientDTOs.add(mealIngredientDTO);
+        }
+        mealDTO.setMealIngredients(mealIngredientDTOs); 
+        return mealDTO;
     }
 }

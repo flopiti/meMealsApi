@@ -5,7 +5,8 @@ import java.util.List;
 public interface MealService {
     Meal saveMeal(MealDTO meal);
     Meal getMealById(Long id);
-    List<Meal> getAllMeals();
+    List<MealDTO> getAllMeals();
     Meal updateMeal(Meal meal);
     void deleteMeal(Long id);
+    List<MealDTO> convertToDTOList(List<Meal> meals);
 }
