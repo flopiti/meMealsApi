@@ -3,6 +3,7 @@ package com.memeals.meMealsApi.Ingredient;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.memeals.meMealsApi.Meal.IngredientMeal;
 
 import lombok.Data;
@@ -22,7 +23,8 @@ public class Ingredient {
 
     @Column(name = "name")
     private String name;
-
+    
+    @JsonIgnore
     @OneToMany(mappedBy = "ingredient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<IngredientMeal> mealIngredients;
 }
