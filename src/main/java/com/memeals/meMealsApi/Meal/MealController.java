@@ -15,7 +15,7 @@ public class MealController {
     private MealService mealService;
 
     @PostMapping
-    public ResponseEntity<Meal> createMeal(@RequestBody Meal meal) {
+    public ResponseEntity<Meal> createMeal(@RequestBody MealDTO meal) {
         Meal savedMeal = mealService.saveMeal(meal);
         return new ResponseEntity<>(savedMeal, HttpStatus.CREATED);
     }
