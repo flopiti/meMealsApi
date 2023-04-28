@@ -75,6 +75,7 @@ public class MealServiceImpl implements MealService {
 
     public MealDTO convertToDTO(Meal meal) {
         MealDTO mealDTO = new MealDTO();
+        mealDTO.setId(meal.getId());
         mealDTO.setMealName(meal.getMealName());
         mealDTO.setIconUrl(meal.getIconUrl());
         List<MealIngredientDTO> mealIngredientDTOs = new ArrayList<>();
