@@ -7,6 +7,6 @@ public class MealIngredientDTO {
     private Long ingredientId;
     private Double quantity;
     private String unitOfMeasurement;
+    private String ingredientName;
 
-    // Add getters and setters
 }
