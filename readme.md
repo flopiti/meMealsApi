@@ -8,3 +8,6 @@ This option does not use any build/jar file.
 ```
 java -Dspring.profiles.active=local -jar ./target/meMealsApi-0.0.1-SNAPSHOT.jar
 ```
+or run with with Docker Compose using
+```
+docker compose -f docker-compose.dev.yml up --build
