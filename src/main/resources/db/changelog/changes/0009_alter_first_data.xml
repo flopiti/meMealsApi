@@ -1,0 +1,126 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="insert_ingredients_and_associate_meals" author="your_name">
+        <!-- Insert ingredients -->
+        <insert tableName="ingredients">
+            <column name="id" value="1"/>
+            <column name="name" value="Ground Beef"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="2"/>
+            <column name="name" value="Spaghetti"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="3"/>
+            <column name="name" value="Chicken"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="4"/>
+            <column name="name" value="Curry Powder"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="5"/>
+            <column name="name" value="Salmon"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="6"/>
+            <column name="name" value="Pizza Dough"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="7"/>
+            <column name="name" value="Tomato Sauce"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="8"/>
+            <column name="name" value="Mozzarella Cheese"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="9"/>
+            <column name="name" value="Beef"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="10"/>
+            <column name="name" value="Vegetables"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="id" value="11"/>
+            <column name="name" value="Soy Sauce"/>
+        </insert>
+
+        <!-- Associate ingredients with meals -->
+        <!-- Spaghetti Bolognese -->
+        <insert tableName="meal_ingredients">
+            <column name="meal_id" value="1"/>
+            <column name="ingredient_id" value="1"/>
+            <column name="quantity" value="500"/>
+            <column name="unit_of_measurement" value="g"/>
+        </insert>
+        <insert tableName="meal_ingredients">
+            <column name="meal_id" value="1"/>
+            <column name="ingredient_id" value="2"/>
+            <column name="quantity" value="400"/>
+            <column name="unit_of_measurement" value="g"/>
+        </insert>
+        
+        <!-- Chicken Curry -->
+        <insert tableName="meal_ingredients">
+            <column name="meal_id" value="2"/>
+            <column name="ingredient_id" value="3"/>
+            <column name="quantity" value="500"/>
+            <column name="unit_of_measurement" value="g"/>
+        </insert>
+        <insert tableName="meal_ingredients">
+            <column name="meal_id" value="2"/>
+            <column name="ingredient_id" value="4"/>
+            <column name="quantity" value="50"/>
+            <column name="unit_of_measurement" value="g"/>
+        </insert>
+        <insert tableName="meal_ingredients">
+            <column name="meal_id" value="3"/>
+            <column name="ingredient_id" value="5"/>
+            <column name="quantity" value="200"/>
+            <column name="unit_of_measurement" value="g"/>
+        </insert>
+
+        <!-- Margherita Pizza -->
+        <insert tableName="meal_ingredients">
+            <column name="meal_id" value="4"/>
+            <column name="ingredient_id" value="6"/>
+            <column name="quantity" value="300"/>
+            <column name="unit_of_measurement" value="g"/>
+        </insert>
+        <insert tableName="meal_ingredients">
+            <column name="meal_id" value="4"/>
+            <column name="ingredient_id" value="7"/>
+            <column name="quantity" value="100"/>
+            <column name="unit_of_measurement" value="g"/>
+        </insert>
+        <insert tableName="meal_ingredients">
+            <column name="meal_id" value="4"/>
+            <column name="ingredient_id" value="8"/>
+            <column name="quantity" value="200"/>
+            <column name="unit_of_measurement" value="g"/>
+        </insert>
+                <insert tableName="meal_ingredients">
+            <column name="meal_id" value="5"/>
+            <column name="ingredient_id" value="9"/>
+            <column name="quantity" value="300"/>
+            <column name="unit_of_measurement" value="g"/>
+        </insert>
+        <insert tableName="meal_ingredients">
+            <column name="meal_id" value="5"/>
+            <column name="ingredient_id" value="10"/>
+            <column name="quantity" value="200"/>
+            <column name="unit_of_measurement" value="g"/>
+        </insert>
+        <insert tableName="meal_ingredients">
+            <column name="meal_id" value="5"/>
+            <column name="ingredient_id" value="11"/>
+            <column name="quantity" value="50"/>
+            <column name="unit_of_measurement" value="ml"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
+
