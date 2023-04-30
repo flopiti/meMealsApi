@@ -5,6 +5,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.memeals.meMealsApi.Auth0.AuthService;
+import com.memeals.meMealsApi.Exceptions.MealNotFoundException;
+import com.memeals.meMealsApi.User.User;
+import com.memeals.meMealsApi.User.UserService;
+import com.memeals.meMealsApi.UserMealLike.UserMealLikeService;
+
 import java.util.List;
 
 @RestController
@@ -14,6 +20,15 @@ public class MealController {
     @Autowired
     private MealService mealService;
 
+    @Autowired
+    private UserMealLikeService userMealLikeService;
+
+    @Autowired
+    private AuthService authService;
+
+    @Autowired
+    private UserService userService;
+    
     @PostMapping
     public ResponseEntity<Meal> createMeal(@RequestBody MealDTO meal) {
         Meal savedMeal = mealService.saveMeal(meal);
@@ -44,6 +59,15 @@ public class MealController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMeal(@PathVariable Long id) {
+        String userId = authService.getAuth0Id();
+        if (userId == null) {
+            throw new MealNotFoundException("User not found");
+        }
+        User user = userService.getUserByAuth0Id(userId).orElseThrow(() -> new MealNotFoundException("User not found"));
+        Meal meal = mealService.getMealById(id);
+
+        System.out.println("meal: WHATTT");
+        userMealLikeService.unlike(user, meal);
         mealService.deleteMeal(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
