@@ -70,6 +70,7 @@ public class MealServiceImpl implements MealService {
 
     @Override
     public void deleteMeal(Long id) {
+        mealIngredientRepository.deleteByMealId(id);
         mealRepository.deleteById(id);
     }
 
