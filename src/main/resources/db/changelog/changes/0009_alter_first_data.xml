@@ -1,0 +1,28 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="update_existing_data" author="your_name">
+        <!-- Update data in the 'ingredients' table -->
+        <update tableName="ingredients">
+            <column name="name" value="Updated Ingredient 1"/>
+            <where>id = 1</where>
+        </update>
+        <update tableName="ingredients">
+            <column name="name" value="Updated Ingredient 2"/>
+            <where>id = 2</where>
+        </update>
+
+        <!-- Update data in the 'meal_ingredients' table -->
+        <update tableName="meal_ingredients">
+            <column name="quantity" value="150"/>
+            <column name="unit_of_measurement" value="g"/>
+            <where>meal_id = 1 AND ingredient_id = 1</where>
+        </update>
+        <update tableName="meal_ingredients">
+            <column name="quantity" value="250"/>
+            <column name="unit_of_measurement" value="ml"/>
+            <where>meal_id = 1 AND ingredient_id = 2</where>
+        </update>
+    </changeSet>
+</databaseChangeLog>
