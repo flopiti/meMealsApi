@@ -31,7 +31,13 @@ public class UserMealLikeService {
     }
 
     public void unlike(User user, Meal meal) {
-        UserMealLike userMealLike = userMealLikeRepository.findByUserAndMeal(user, meal);
-        userMealLikeRepository.delete(userMealLike);
+        UserMealLike userMealLike;
+        try{
+            userMealLike = userMealLikeRepository.findByUserAndMeal(user, meal);
+            userMealLikeRepository.delete(userMealLike);
+        }
+        catch(Exception e){
+            System.out.println("UserMealLike not found");
+        }
     }
 }
