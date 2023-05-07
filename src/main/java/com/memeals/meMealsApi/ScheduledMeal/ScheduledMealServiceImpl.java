@@ -50,7 +50,7 @@ public class ScheduledMealServiceImpl implements ScheduledMealService {
     }
 
     @Override
-    public ScheduledMeal editScheduledMeal(Long scheduledMealId, LocalDate date, ScheduledMealType mealType) throws ScheduledMealNotFoundException {
+    public ScheduledMealDTO editScheduledMeal(Long scheduledMealId, LocalDate date, ScheduledMealType mealType) throws ScheduledMealNotFoundException {
         Optional<ScheduledMeal> optionalScheduledMeal = scheduledMealRepository.findById(scheduledMealId);
         if (!optionalScheduledMeal.isPresent()) {
             throw new ScheduledMealNotFoundException("Scheduled Meal not found for Id: " + scheduledMealId);
@@ -58,7 +58,13 @@ public class ScheduledMealServiceImpl implements ScheduledMealService {
         ScheduledMeal scheduledMeal = optionalScheduledMeal.get();
         scheduledMeal.setDate(date);
         scheduledMeal.setMealType(mealType);
-        return scheduledMealRepository.save(scheduledMeal);
+        ScheduledMeal savedScheduledMeal = scheduledMealRepository.save(scheduledMeal);
+        ScheduledMealDTO dto = new ScheduledMealDTO();
+        dto.setId(savedScheduledMeal.getId());
+        dto.setDate(savedScheduledMeal.getDate());
+        dto.setMealType(savedScheduledMeal.getMealType());
+        dto.setMealId(savedScheduledMeal.getMeal().getId());
+        return dto;
     }
 
     @Override
