@@ -7,5 +7,5 @@ public interface ScheduledMealService {
     List<ScheduledMealDTO> getAllMyScheduledMeal(Long userId);
     ScheduledMeal scheduleMeal( Long mealId, LocalDate date, ScheduledMealType mealType, Long userId);
     void deleteScheduledMeal(Long scheduledMealId);
-    ScheduledMeal editScheduledMeal(Long scheduledMealId, LocalDate date, ScheduledMealType mealType);
+    ScheduledMealDTO editScheduledMeal(Long scheduledMealId, LocalDate date, ScheduledMealType mealType);
 }
