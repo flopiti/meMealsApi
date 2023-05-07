@@ -47,14 +47,16 @@ public class ScheduledMealController {
     @DeleteMapping("/{scheduledMealId}")
     public void deleteScheduledMeal(@PathVariable Long scheduledMealId) {
         scheduledMealService.deleteScheduledMeal(scheduledMealId);
-    }
+    }    
 
     @PutMapping("/{scheduledMealId}")
-    public ScheduledMeal editScheduledMeal(@PathVariable Long scheduledMealId,
-                                            @RequestParam(value = "date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
-                                            @RequestParam(value = "mealType", required = false) ScheduledMealType mealType) {
-        return scheduledMealService.editScheduledMeal(scheduledMealId, date, mealType);
+    public ScheduledMealDTO editScheduledMeal(@PathVariable Long scheduledMealId,
+                                           @RequestBody ScheduledMealRequest scheduledMealRequest) {
+    
+        System.out.println("Scheduled Meal new date: " + scheduledMealRequest.getDate());
+        return scheduledMealService.editScheduledMeal(scheduledMealId, scheduledMealRequest.getDate(), scheduledMealRequest.getMealType());
     }
+    
 
     @ExceptionHandler(MealNotFoundException.class)
     public ResponseEntity<String> handleMealNotFoundException(MealNotFoundException ex) {
