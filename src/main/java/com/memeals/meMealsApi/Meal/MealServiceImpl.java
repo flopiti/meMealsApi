@@ -1,5 +1,6 @@
 package com.memeals.meMealsApi.Meal;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -65,6 +66,10 @@ public class MealServiceImpl implements MealService {
 
     @Override
     public Meal updateMeal(Meal meal) {
+        Optional<Meal> existingMeal = mealRepository.findById(meal.getId());
+        if (existingMeal.isPresent()) {
+            Hibernate.initialize(existingMeal.get().getMealIngredients());
+        }
         return mealRepository.save(meal);
     }
 
