@@ -40,4 +40,14 @@ public class UserMealLikeService {
             System.out.println("UserMealLike not found");
         }
     }
+
+    public void unlikeAll(Meal meal){
+        List<UserMealLike> userMealLikes = userMealLikeRepository.findByMeal(meal);
+        try{
+        userMealLikeRepository.deleteAll(userMealLikes);
+        }
+        catch(Exception e){
+            System.out.println("UserMealLike not found");
+        }
+    }
 }
