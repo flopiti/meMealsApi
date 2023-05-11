@@ -13,4 +13,7 @@ public interface UserMealLikeRepository extends JpaRepository<UserMealLike, Long
     List<UserMealLike> findByUser(User user);
 
     UserMealLike findByUserAndMeal(User user, Meal meal);
+
+    List<UserMealLike> findByMeal(Meal meal);
+
 }
