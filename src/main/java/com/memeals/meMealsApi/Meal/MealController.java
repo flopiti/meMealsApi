@@ -59,15 +59,8 @@ public class MealController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMeal(@PathVariable Long id) {
-        String userId = authService.getAuth0Id();
-        if (userId == null) {
-            throw new MealNotFoundException("User not found");
-        }
-        User user = userService.getUserByAuth0Id(userId).orElseThrow(() -> new MealNotFoundException("User not found"));
         Meal meal = mealService.getMealById(id);
-
-        System.out.println("meal: WHATTT");
-        userMealLikeService.unlike(user, meal);
+        userMealLikeService.unlikeAll( meal);
         mealService.deleteMeal(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
