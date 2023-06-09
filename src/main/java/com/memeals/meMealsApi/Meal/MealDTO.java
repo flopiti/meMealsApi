@@ -2,6 +2,8 @@ package com.memeals.meMealsApi.Meal;
 
 import java.util.List;
 
+import com.memeals.meMealsApi.MealIngredient.MealIngredientDTO;
+
 import lombok.Data;
 
 @Data

@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service;
 
 import com.memeals.meMealsApi.Ingredient.Ingredient;
 import com.memeals.meMealsApi.Ingredient.IngredientRepository;
+import com.memeals.meMealsApi.MealIngredient.IngredientMeal;
+import com.memeals.meMealsApi.MealIngredient.IngredientMealRepository;
+import com.memeals.meMealsApi.MealIngredient.MealIngredientDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,12 +68,15 @@ public class MealServiceImpl implements MealService {
     }
 
     @Override
-    public Meal updateMeal(Meal meal) {
-        Optional<Meal> existingMeal = mealRepository.findById(meal.getId());
+    public MealDTO updateMeal(MealDTO mealDTO) {
+        Optional<Meal> existingMeal = mealRepository.findById(mealDTO.getId());
         if (existingMeal.isPresent()) {
             Hibernate.initialize(existingMeal.get().getMealIngredients());
         }
-        return mealRepository.save(meal);
+        Meal updatedMeal = new Meal(mealDTO.getMealName(), mealDTO.getIconUrl());
+
+        mealRepository.save(updatedMeal);
+        return convertToDTO(updatedMeal);
     }
 
     @Override

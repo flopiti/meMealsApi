@@ -1,4 +1,4 @@
-package com.memeals.meMealsApi.Meal;
+package com.memeals.meMealsApi.MealIngredient;
 
 import javax.transaction.Transactional;
 

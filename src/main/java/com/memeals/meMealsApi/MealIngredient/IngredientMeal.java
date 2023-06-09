@@ -1,7 +1,8 @@
-package com.memeals.meMealsApi.Meal;
+package com.memeals.meMealsApi.MealIngredient;
 
 import javax.persistence.*;
 import com.memeals.meMealsApi.Ingredient.Ingredient;
+import com.memeals.meMealsApi.Meal.Meal;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

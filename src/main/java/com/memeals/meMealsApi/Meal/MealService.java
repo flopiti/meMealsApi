@@ -6,7 +6,7 @@ public interface MealService {
     Meal saveMeal(MealDTO meal);
     Meal getMealById(Long id);
     List<MealDTO> getAllMeals();
-    Meal updateMeal(Meal meal);
+    MealDTO updateMeal(MealDTO meal);
     void deleteMeal(Long id);
     List<MealDTO> convertToDTOList(List<Meal> meals);
 }
