@@ -52,9 +52,7 @@ public class MealController {
 
     @PutMapping("/{id}")
     public ResponseEntity<MealDTO> updateMeal(@PathVariable Long id, @RequestBody MealDTO meal) {
-        meal.setId(id);
-        MealDTO updatedMeal = mealService.updateMeal(meal);
-        return new ResponseEntity<>(updatedMeal, HttpStatus.OK);
+        return new ResponseEntity<>(mealService.convertToDTO(mealService.updateMeal(meal);), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
