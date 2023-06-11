@@ -6,10 +6,10 @@ services:
     container_name: mysql-container
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: ${{ secrets.DB_ROOT_PASSWORD }}
+      MYSQL_ROOT_PASSWORD: ${secrets.DB_ROOT_PASSWORD}
       MYSQL_DATABASE: meMeals
-      MYSQL_USER: ${{ secrets.DB_USER }}
-      MYSQL_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      MYSQL_USER: ${secrets.DB_USER}
+      MYSQL_PASSWORD: ${secrets.DB_PASSWORD}
     ports:
       - "3307:3306"
     volumes:
