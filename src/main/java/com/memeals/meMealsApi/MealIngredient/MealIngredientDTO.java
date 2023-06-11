@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class MealIngredientDTO {
+    private Long id;
     private Long ingredientId;
     private Double quantity;
     private String unitOfMeasurement;
