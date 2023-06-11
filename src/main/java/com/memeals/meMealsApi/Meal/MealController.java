@@ -51,10 +51,8 @@ public class MealController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Meal> updateMeal(@PathVariable Long id, @RequestBody Meal meal) {
-        meal.setId(id);
-        Meal updatedMeal = mealService.updateMeal(meal);
-        return new ResponseEntity<>(updatedMeal, HttpStatus.OK);
+    public ResponseEntity<MealDTO> updateMeal(@PathVariable Long id, @RequestBody MealDTO meal) {
+        return new ResponseEntity<>(mealService.convertToDTO(mealService.updateMeal(meal);), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
