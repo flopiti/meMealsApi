@@ -19,5 +19,5 @@ jobs:
             ls
             cd /apps/meMealsApi
             chmod +x ./scripts/deploy.sh
-            ./scripts/deploy.sh
+            ./scripts/deploy.sh "${{ secrets.DB_USER }}" "${{ secrets.DB_PASSWORD }}" "${{ secrets.DB_ROOT_PASSWORD }}"
 
