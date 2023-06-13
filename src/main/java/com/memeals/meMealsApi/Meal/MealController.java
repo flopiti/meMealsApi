@@ -30,9 +30,9 @@ public class MealController {
     private UserService userService;
     
     @PostMapping
-    public ResponseEntity<Meal> createMeal(@RequestBody MealDTO meal) {
+    public ResponseEntity<MealDTO> createMeal(@RequestBody MealDTO meal) {
         Meal savedMeal = mealService.saveMeal(meal);
-        return new ResponseEntity<>(savedMeal, HttpStatus.CREATED);
+        return new ResponseEntity<>(mealService.convertToDTO(savedMeal), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
