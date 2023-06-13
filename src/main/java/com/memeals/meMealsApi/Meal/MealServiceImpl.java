@@ -28,19 +28,21 @@ public class MealServiceImpl implements MealService {
 
     @Override
     public Meal saveMeal(MealDTO mealDTO) {
-        Meal meal = new Meal(mealDTO.getMealName(), mealDTO.getIconUrl());
-        meal =  mealRepository.save(meal);
+        Meal meal = new Meal();
+        List<IngredientMeal> mealIngredients = new ArrayList<>();
+        meal.setMealName(mealDTO.getMealName());
+        meal.setIconUrl(mealDTO.getIconUrl());
+        Meal savedMeal = mealRepository.save(meal);
         if (mealDTO.getMealIngredients() != null) {
             for (MealIngredientDTO mealIngredientDTO : mealDTO.getMealIngredients()) {
                 Ingredient ingredient = ingredientRepository.findById(mealIngredientDTO.getIngredientId())
                         .orElseThrow(() -> new IllegalArgumentException("Invalid ingredient ID"));
-
-                IngredientMeal mealIngredient = new IngredientMeal(null, meal, ingredient, mealIngredientDTO.getQuantity(),mealIngredientDTO.getUnitOfMeasurement());
-                mealIngredientRepository.save(mealIngredient);
+                        IngredientMeal mealIngredient = mealIngredientRepository.save(new IngredientMeal(null, meal, ingredient, mealIngredientDTO.getQuantity(),mealIngredientDTO.getUnitOfMeasurement()));
+                mealIngredients.add(mealIngredient);
             }
         }
-
-        return meal;
+        savedMeal.setMealIngredients(mealIngredients);
+        return savedMeal;
     }
 
     public List<MealDTO> convertToDTOList(List<Meal> meals) {
