@@ -82,6 +82,7 @@ public class MealServiceImpl implements MealService {
         }
 
         if (mealDTO.getMealIngredients() != null) {
+            mealIngredientRepository.deleteByMealId(mealDTO.getId());
             for (MealIngredientDTO mealIngredientDTO : mealDTO.getMealIngredients()) {
                 boolean alreadyExists = mealIngredientDTO.getId() != null;
 
