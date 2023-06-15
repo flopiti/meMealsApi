@@ -82,6 +82,19 @@ public class MealServiceImpl implements MealService {
         }
 
         if (mealDTO.getMealIngredients() != null) {
+            List<IngredientMeal> ingredientMeals = mealIngredientRepository.findByMealId(mealDTO.getId());
+            for (IngredientMeal ingredientMeal :  ingredientMeals) {
+                boolean exists = false;
+                List<MealIngredientDTO> mealIngredientDTOs = mealDTO.getMealIngredients();
+                for (MealIngredientDTO mealIngredientDTO : mealIngredientDTOs) {
+                    if (ingredientMeal.getId().equals(mealIngredientDTO.getId())) {
+                        exists = true;
+                    }
+                }
+                if (!exists) {
+                    mealIngredientRepository.deleteById(ingredientMeal.getId());
+                }
+            }
             for (MealIngredientDTO mealIngredientDTO : mealDTO.getMealIngredients()) {
                 boolean alreadyExists = mealIngredientDTO.getId() != null;
 
