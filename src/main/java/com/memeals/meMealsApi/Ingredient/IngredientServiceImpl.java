@@ -27,4 +27,8 @@ public class IngredientServiceImpl implements IngredientService {
     public void deleteIngredient(Long id){
         ingredientRepository.deleteById(id);
     }
+
+    public List<Ingredient> getIngredientByName(String name){
+        return ingredientRepository.findByName(name);
+    }
 }

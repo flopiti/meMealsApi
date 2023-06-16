@@ -11,4 +11,6 @@ public interface IngredientService {
     List<Ingredient> getAllIngredients();
 
     void deleteIngredient(Long id);
+
+    List<Ingredient> getIngredientByName(String name);
 }
