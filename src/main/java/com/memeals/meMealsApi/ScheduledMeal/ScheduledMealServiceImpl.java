@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.memeals.meMealsApi.Auth0.AuthService;
 import com.memeals.meMealsApi.Exceptions.MealNotFoundException;
 import com.memeals.meMealsApi.Exceptions.ScheduledMealNotFoundException;
+import com.memeals.meMealsApi.IngredientMeal.IngredientMeal;
+import com.memeals.meMealsApi.IngredientMeal.IngredientMealDTO;
 import com.memeals.meMealsApi.Meal.Meal;
 import com.memeals.meMealsApi.Meal.MealRepository;
 import com.memeals.meMealsApi.User.User;
@@ -82,4 +84,30 @@ public class ScheduledMealServiceImpl implements ScheduledMealService {
         }
         return scheduledMealDTOs;
         }
+
+    @Override
+    public List<IngredientMealDTO> getAllMyScheduledMealIngredients(Long userId, LocalDate startDate, LocalDate endDate) {
+        List<ScheduledMeal> scheduledMeals = scheduledMealRepository.findByUserIdAndDateBetween(userId, startDate, endDate);
+        List<IngredientMealDTO> mealIngredientDTOs = new ArrayList<>();
+        for (ScheduledMeal scheduledMeal : scheduledMeals) {
+            Meal meal = scheduledMeal.getMeal();
+            List<IngredientMeal> mealIngredients = meal.getMealIngredients();
+            for (IngredientMeal mealIngredient : mealIngredients) {
+                mealIngredientDTOs.add(mealIngredient.toDTO());
+            }
+        }
+        for (int i = 0; i < mealIngredientDTOs.size(); i++) {
+            for (int j = i + 1; j < mealIngredientDTOs.size(); j++) {
+                if (mealIngredientDTOs.get(i).getIngredientId().equals(mealIngredientDTOs.get(j).getIngredientId()) &&
+                        mealIngredientDTOs.get(i).getUnitOfMeasurement().equals(mealIngredientDTOs.get(j).getUnitOfMeasurement()) &&
+                        mealIngredientDTOs.get(i).getIngredientName().equals(mealIngredientDTOs.get(j).getIngredientName())) {
+                    mealIngredientDTOs.get(i).setQuantity(mealIngredientDTOs.get(i).getQuantity() + mealIngredientDTOs.get(j).getQuantity());
+                    mealIngredientDTOs.remove(j);
+                    j--;
+                }
+            }
+        }
+
+        return mealIngredientDTOs;
+    }
 }
