@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 
 import com.memeals.meMealsApi.Ingredient.Ingredient;
 import com.memeals.meMealsApi.Ingredient.IngredientRepository;
-import com.memeals.meMealsApi.MealIngredient.IngredientMeal;
-import com.memeals.meMealsApi.MealIngredient.IngredientMealRepository;
-import com.memeals.meMealsApi.MealIngredient.MealIngredientDTO;
+import com.memeals.meMealsApi.IngredientMeal.IngredientMeal;
+import com.memeals.meMealsApi.IngredientMeal.IngredientMealRepository;
+import com.memeals.meMealsApi.IngredientMeal.IngredientMealDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +34,7 @@ public class MealServiceImpl implements MealService {
         meal.setIconUrl(mealDTO.getIconUrl());
         Meal savedMeal = mealRepository.save(meal);
         if (mealDTO.getMealIngredients() != null) {
-            for (MealIngredientDTO mealIngredientDTO : mealDTO.getMealIngredients()) {
+            for (IngredientMealDTO mealIngredientDTO : mealDTO.getMealIngredients()) {
                 Ingredient ingredient = ingredientRepository.findById(mealIngredientDTO.getIngredientId())
                         .orElseThrow(() -> new IllegalArgumentException("Invalid ingredient ID"));
                         IngredientMeal mealIngredient = mealIngredientRepository.save(new IngredientMeal(null, meal, ingredient, mealIngredientDTO.getQuantity(),mealIngredientDTO.getUnitOfMeasurement()));
@@ -85,8 +85,8 @@ public class MealServiceImpl implements MealService {
             List<IngredientMeal> ingredientMeals = mealIngredientRepository.findByMealId(mealDTO.getId());
             for (IngredientMeal ingredientMeal :  ingredientMeals) {
                 boolean exists = false;
-                List<MealIngredientDTO> mealIngredientDTOs = mealDTO.getMealIngredients();
-                for (MealIngredientDTO mealIngredientDTO : mealIngredientDTOs) {
+                List<IngredientMealDTO> mealIngredientDTOs = mealDTO.getMealIngredients();
+                for (IngredientMealDTO mealIngredientDTO : mealIngredientDTOs) {
                     if (ingredientMeal.getId().equals(mealIngredientDTO.getId())) {
                         exists = true;
                     }
@@ -95,7 +95,7 @@ public class MealServiceImpl implements MealService {
                     mealIngredientRepository.deleteById(ingredientMeal.getId());
                 }
             }
-            for (MealIngredientDTO mealIngredientDTO : mealDTO.getMealIngredients()) {
+            for (IngredientMealDTO mealIngredientDTO : mealDTO.getMealIngredients()) {
                 boolean alreadyExists = mealIngredientDTO.getId() != null;
 
                 if(!alreadyExists){
@@ -115,7 +115,7 @@ public class MealServiceImpl implements MealService {
         return mealRepository.save(editedMeal);
     }
 
-    public IngredientMeal convertFromDTOIngredientMeal(MealIngredientDTO mealIngredientDTO) {
+    public IngredientMeal convertFromDTOIngredientMeal(IngredientMealDTO mealIngredientDTO) {
         IngredientMeal mealIngredient = mealIngredientRepository.findById(mealIngredientDTO.getId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid meal ingredient ID"));
         return mealIngredient;
@@ -131,7 +131,7 @@ public class MealServiceImpl implements MealService {
         Meal meal = new Meal(mealDTO.getMealName(), mealDTO.getIconUrl());
         meal.setId(mealDTO.getId());
         List<IngredientMeal> mealIngredients = new ArrayList<>();
-        for (MealIngredientDTO mealIngredientDTO : mealDTO.getMealIngredients()) {
+        for (IngredientMealDTO mealIngredientDTO : mealDTO.getMealIngredients()) {
             Ingredient ingredient = ingredientRepository.findById(mealIngredientDTO.getIngredientId())
                     .orElseThrow(() -> new IllegalArgumentException("Invalid ingredient ID"));
 
@@ -147,10 +147,10 @@ public class MealServiceImpl implements MealService {
         mealDTO.setId(meal.getId());
         mealDTO.setMealName(meal.getMealName());
         mealDTO.setIconUrl(meal.getIconUrl());
-        List<MealIngredientDTO> mealIngredientDTOs = new ArrayList<>();
+        List<IngredientMealDTO> mealIngredientDTOs = new ArrayList<>();
         List<IngredientMeal> mealIngredients = meal.getMealIngredients();
         for (IngredientMeal mealIngredient : mealIngredients) {
-            MealIngredientDTO mealIngredientDTO = new MealIngredientDTO();
+            IngredientMealDTO mealIngredientDTO = new IngredientMealDTO();
             mealIngredientDTO.setId(mealIngredient.getId());
             mealIngredientDTO.setIngredientId(mealIngredient.getIngredient().getId());
             mealIngredientDTO.setQuantity(mealIngredient.getQuantity());

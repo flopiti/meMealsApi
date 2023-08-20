@@ -1,4 +1,4 @@
-package com.memeals.meMealsApi.MealIngredient;
+package com.memeals.meMealsApi.IngredientMeal;
 
 import java.util.List;
 

@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.*;
 
 import com.memeals.meMealsApi.Auth0.AuthService;
 import com.memeals.meMealsApi.Exceptions.MealNotFoundException;
+import com.memeals.meMealsApi.IngredientMeal.IngredientMealDTO;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -33,6 +35,15 @@ public class ScheduledMealController {
         }
         System.out.println("User ID: " + userId);
         return scheduledMealService.getAllMyScheduledMeal(userId.equals("null") ? null : Long.parseLong(userId));
+    }
+
+    @GetMapping("/ingredients")
+    public List<IngredientMealDTO> getAllForUserMealsIngredients(@RequestParam @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate startDate, @RequestParam @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate endDate) {
+        String userId = authService.getUserId();
+        if(userId == null) {
+            throw new MealNotFoundException("User not found");
+        }
+        return scheduledMealService.getAllMyScheduledMealIngredients(Long.parseLong(userId), startDate, endDate);
     }
 
     @PostMapping

@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.memeals.meMealsApi.MealIngredient.IngredientMeal;
+import com.memeals.meMealsApi.IngredientMeal.IngredientMeal;
 
 import lombok.Data;
 

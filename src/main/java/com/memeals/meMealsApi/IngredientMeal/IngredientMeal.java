@@ -1,4 +1,4 @@
-package com.memeals.meMealsApi.MealIngredient;
+package com.memeals.meMealsApi.IngredientMeal;
 
 import javax.persistence.*;
 import com.memeals.meMealsApi.Ingredient.Ingredient;
@@ -34,4 +34,13 @@ public class IngredientMeal {
     @Column(name = "unit_of_measurement")
     private String unitOfMeasurement;
 
+    public IngredientMealDTO toDTO() {
+        IngredientMealDTO dto = new IngredientMealDTO();
+        dto.setId(this.id);
+        dto.setIngredientId(this.ingredient.getId());
+        dto.setQuantity(this.quantity);
+        dto.setUnitOfMeasurement(this.unitOfMeasurement);
+        dto.setIngredientName(this.ingredient.getName());
+        return dto;
+    }
 }

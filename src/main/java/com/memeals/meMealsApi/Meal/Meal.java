@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.memeals.meMealsApi.MealIngredient.IngredientMeal;
+import com.memeals.meMealsApi.IngredientMeal.IngredientMeal;
 
 import lombok.Data;
 
